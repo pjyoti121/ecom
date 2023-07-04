@@ -26,9 +26,9 @@ module.exports = createCoreController('api::order.order',({strapi})=>({
                     product_data:{
                         name:item.title,
                     },
-                    unit_amount: item.price*100
+                    unit_amount: Math.round(item.price*100),
                 },
-                quantity:item.quantity,
+                quantity:product.quantity,
             };
             
             
@@ -60,6 +60,7 @@ module.exports = createCoreController('api::order.order',({strapi})=>({
         
         }catch(err){
             ctx.response.status = 500;
+            console.log(err)
             return err;
         }
     },
